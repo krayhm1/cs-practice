@@ -27,7 +27,7 @@ def read_valid(lines: list[str]) -> list[dict]:
             continue
         try:
             records.append(parse_record(line))
-        except ValueError
+        except ValueError:
             continue
 
     return records
@@ -35,8 +35,15 @@ def read_valid(lines: list[str]) -> list[dict]:
 def average_by_city(records: list[dict]) -> dict:
     total = {}
     count = {}
-    for rec in records
+    for rec in records:
         city = rec["city"]
         total[city] = total.get(city, 0) + rec['temp']
         count[city] = count.get(city, 0) + 1
+
     return {city: round(total[city] / count[city], 1) for city in total}
+
+def warmest_city(records: list[dict]) -> str:
+    avg = average_by_city(records)
+    if not avg:
+        raise ValueError('нет записей')
+    return max(sorted(avg), key=avg.get)
