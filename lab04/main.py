@@ -14,7 +14,7 @@ for line in lines:
     except ValueError:
         skip += 1
 print(len(records))
-print(skip
+print(skip)
 
 best = warmest_city(records)
 print(f"{average_by_city(records)[best]:.1f}")
