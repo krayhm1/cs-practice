@@ -1,8 +1,10 @@
-#def parse_event(line):
-with open('C:/Users/user/cs-practice/lab05/events-small.log', 'r', encoding='utf-8') as f:
+def parse_event(line: str) -> dict:
+    parts = line.strip().split(maxsplit=2)
+    if len(parts) != 3:
+        raise ValueError("Недостаточно частей в строке")
+    
+    time, level, message = parts
+    if level not in {"DEBUG", "INFO", "WARNING", "ERROR"}:
+        raise ValueError("Неизвестный уровень")
         
-        for line in f:
-            a = line.split(':', 1)
-            print(a)
-            print(line)
-        
+    return {"time": time, "level": level, "message": message}
